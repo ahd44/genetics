@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Monohybrid Cross</title>
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../base.css">
+    <link rel="stylesheet" type="text/css" href="monohybrid.css">
+</head>
+
+<body>
+    <div id="content">
+        <h1>Exploring Genotypic and Phenotypic Ratios<br />
+            in a Monohybrid Cross</h1>
+        <div id="parta">
+            <p>In this activity, we will look at two alleles of the <em>ebony</em> gene in <em>Drosophila
+                    melanogaster</em> fruit flies.
+                When expressed in the homozygous recessive genotype, the recessive allele (e) for the <em>ebony</em>
+                gene
+                results in a dark, ebony-colored body phenotype.</p>
+            <p>We will examine three different crosses between pairs of flies. For each cross, the parents will be
+                shown, along with their genotypes. You will record the different
+                potential genotypes of the gametes that each parent produces, and then a completed Punnett Square will
+                be displayed.
+                Then, you will be asked to record the <strong>genotypic</strong> and <strong>phenotypic</strong> ratios
+                for
+                each cross.</p>
+            </p>
+
+            <div class="instructions">For each parent, type in all possible gamete genotypes in the boxes below each
+                fly.</div>
+            <div class="cross_flow">
+                <div><span><strong>Parental generation:</strong></span></div>
+                <div class="column_flow">
+                    <span><strong>Father</strong></span>
+                    <span>EE</span>
+                    <img src="./wildtype.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="aa1" />
+                </div>
+                <div><span class="bigx">X</span></div>
+                <div class="column_flow">
+                    <span><strong>Mother</strong></span>
+                    <span>ee</span>
+                    <img src="./ebony.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="ab1" />
+                </div>
+            </div>
+            <input type="button" id="acheck" value="Check answer" data-prefix="a" />
+            <div id="afeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in red above.</div>
+        </div>
+
+        <div id="partb" class="hidden fadein">
+            <div class="instructions">
+                We can use a Punnett Square, shown below, to determine both the genotypic and phenotypic ratios
+                resulting from this cross.
+            </div>
+            <div class="ps_flow">
+                <table class="ps">
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <th colspan="2" class="father"><span>Father</span></th>
+                    </tr>
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <td class="t-gamete">E</td>
+                        <td class="t-gamete">E</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2" class="mother"><span class="vert_text">Mother</span></th>
+                        <td class="l-gamete">e</td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="l-gamete">e</td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                    </tr>
+                </table>
+                <div class="column_flow">
+                    <div class="instructions">
+                        Count the number of each <strong>genotype</strong> present in the offspring of the cross,
+                        displayed in the Punnett Square below.
+                    </div>
+                    <span><strong>Genotypes</strong></span>
+                    <table class="ratios">
+                        <tr>
+                            <td>EE</td>
+                            <td><input type="number" id="b1" min="0" max="4" value="0" data-prefix="b"
+                                    data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ee</td>
+                            <td><input type="number" id="b2" min="0" max="4" value="0" data-prefix="b"
+                                    data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>ee</td>
+                            <td><input type="number" id="b3" min="0" max="4" value="0" data-prefix="b"
+                                    data-postfix="g" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Genotypic ratio:</strong></span>
+                    <div id="bratiog" data-homodom="0" data-hetero="0" data-homorec="0">0:0:0</div>
+                </div>
+                <div id="bphenotype_placeholder" class="phenotype_placeholder"></div>
+                <div class="column_flow hidden fadein phenotype" id="partb2">
+                    <div class="instructions">
+                        Count the number of each <strong>phenotype</strong> present in the offspring of the cross,
+                        displayed in the Punnett Square below.
+                    </div>
+                    <span><strong>Phenotypes</strong></span>
+                    <table class="ratios phenotype">
+                        <tr>
+                            <td>wild-type <img src="./wildtype.png"></td>
+                            <td><input type="number" id="b4" min="0" max="4" value="0" data-prefix="b"
+                                    data-postfix="p" /></td>
+                        </tr>
+                        <tr>
+                            <td><em>ebony</em> <img src="./ebony.png"></td>
+                            <td><input type="number" id="b5" min="0" max="4" value="0" data-prefix="b"
+                                    data-postfix="p" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Phenotypic ratio:</strong></span>
+                    <div id="bratiop" data-wildtype="0" data-ebony="0">0:0</div>
+                </div>
+            </div>
+            <input type="button" id="bcheck" value="Check answer" data-stage="genotype" data-prefix="b" />
+            <div id="bfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in red above.
+            </div>
+        </div>
+        <div id="partc" class="hidden fadein">
+            <p>In your own words, what do the genotypic and phenotypic ratios represent?</p>
+            <textarea id="c1"></textarea>
+            <div id="cexplanation" class="explanation hidden fadein">
+                <p>A genotypic ratio of 0:1:0 means that all of the offspring will have the same genotype: Ee.</p>
+                <p>A phenotypic ratio of 1:0 means that all of the offspring will express the wild-type phenotype.</p>
+            </div>
+            <input type="button" id="ccheck" value="Continue" data-stage="textentry" data-prefix="c" />
+            <div id="cfeedback" class="feedback hidden fadein">That's a little short&mdash;could you expand a bit on
+                what you're saying above?</div>
+        </div>
+        <div id="cdseparator" class="separator hidden"></div>
+        <div id="partd" class="hidden fadein">
+            <p>Now, we will move onto a different cross: mating a homozygous dominant fly (genotype EE), with a
+                heterozygous fly (genotype Ee).</p>
+            <div class="instructions">For each parent, type in all possible gamete genotypes in the boxes below each
+                fly.</div>
+            <div class="cross_flow">
+                <div><span><strong>Parental generation:</strong></span></div>
+                <div class="column_flow">
+                    <span><strong>Father</strong></span>
+                    <span>EE</span>
+                    <img src="./wildtype.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="da1" />
+                </div>
+                <div><span class="bigx">X</span></div>
+                <div class="column_flow">
+                    <span><strong>Mother</strong></span>
+                    <span>Ee</span>
+                    <img src="./wildtype.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="db1" />
+                    <input type="text" placeholder="E (e.g.)" id="db2" />
+                </div>
+            </div>
+            <input type="button" id="dcheck" value="Check answer" data-prefix="d" />
+            <div id="dfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in red
+                above.</div>
+        </div>
+
+        <div id="parte" class="hidden fadein">
+            <div class="instructions">
+                We can use a Punnett Square, shown below, to determine both the genotypic and phenotypic ratios
+                resulting from
+                this cross.
+            </div>
+            <div class="ps_flow">
+                <table class="ps narrow">
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <th colspan="2" class="father"><span>Father</span></th>
+                    </tr>
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <td class="t-gamete">E</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2" class="mother"><span class="vert_text">Mother</span></th>
+                        <td class="l-gamete">E</td>
+                        <td>EE <img src="./wildtype.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="l-gamete">e</td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                    </tr>
+                </table>
+                <div class="column_flow">
+                    <div class="instructions">
+                        Count the number of each <strong>genotype</strong> present in the offspring of the cross,
+                        displayed in
+                        the Punnett Square below.
+                    </div>
+                    <span><strong>Genotypes</strong></span>
+                    <table class="ratios">
+                        <tr>
+                            <td>EE</td>
+                            <td><input type="number" id="e1" min="0" max="4" value="0" data-prefix="e"
+                                    data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ee</td>
+                            <td><input type="number" id="e2" min="0" max="4" value="0" data-prefix="e"
+                                    data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>ee</td>
+                            <td><input type="number" id="e3" min="0" max="4" value="0" data-prefix="e"
+                                    data-postfix="g" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Genotypic ratio:</strong></span>
+                    <div id="eratiog" data-homodom="0" data-hetero="0" data-homorec="0">0:0:0</div>
+                </div>
+                <div id="ephenotype_placeholder" class="phenotype_placeholder"></div>
+                <div class="column_flow hidden fadein phenotype" id="parte2">
+                    <div class="instructions">
+                        Count the number of each <strong>phenotype</strong> present in the offspring of the cross,
+                        displayed in
+                        the Punnett Square below.
+                    </div>
+                    <span><strong>Phenotypes</strong></span>
+                    <table class="ratios phenotype">
+                        <tr>
+                            <td>wild-type <img src="./wildtype.png"></td>
+                            <td><input type="number" id="e4" min="0" max="4" value="0" data-prefix="e"
+                                    data-postfix="p" /></td>
+                        </tr>
+                        <tr>
+                            <td><em>ebony</em> <img src="./ebony.png"></td>
+                            <td><input type="number" id="e5" min="0" max="4" value="0" data-prefix="e"
+                                    data-postfix="p" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Phenotypic ratio:</strong></span>
+                    <div id="eratiop" data-wildtype="0" data-ebony="0">0:0</div>
+                </div>
+            </div>
+            <input type="button" id="echeck" value="Check answer" data-stage="genotype" data-prefix="e" />
+            <div id="efeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in
+                red above.
+            </div>
+        </div>
+        <div id="partf" class="hidden fadein">
+            <p>In your own words, what do the genotypic and phenotypic ratios represent?</p>
+            <textarea id="f1"></textarea>
+            <div id="fexplanation" class="explanation hidden fadein">
+                <p>A genotypic ratio of 1:1:0 means that half of the offspring will have genotype EE, while
+                    the other half will have genotype Ee.</p>
+                <p>A phenotypic ratio of 1:0 means that all of the offspring will express the wild-type phenotype.</p>
+            </div>
+            <input type="button" id="fcheck" value="Continue" data-stage="textentry" data-prefix="f" />
+            <div id="ffeedback" class="feedback hidden fadein">That's a little short&mdash;could you expand a bit on
+                what you're
+                saying above?</div>
+        </div>
+        <div id="fgseparator" class="separator hidden"></div>
+
+        <div id="partg" class="hidden fadein">
+            <p>Now, we will move onto a different cross: mating a heterozygous fly (genotype Ee), with a
+                homozygous recessive fly (genotype ee).</p>
+            <div class="instructions">For each parent, type in all possible gamete genotypes in the boxes below each
+                fly.</div>
+            <div class="cross_flow">
+                <div><span><strong>Parental generation:</strong></span></div>
+                <div class="column_flow">
+                    <span><strong>Father</strong></span>
+                    <span>Ee</span>
+                    <img src="./wildtype.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="ga1" />
+                    <input type="text" placeholder="E (e.g.)" id="ga2" />
+                </div>
+                <div><span class="bigx">X</span></div>
+                <div class="column_flow">
+                    <span><strong>Mother</strong></span>
+                    <span>ee</span>
+                    <img src="./ebony.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="gb1" />
+                </div>
+            </div>
+            <input type="button" id="gcheck" value="Check answer" data-prefix="g" />
+            <div id="gfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in red
+                above.</div>
+        </div>
+        
+        <div id="parth" class="hidden fadein">
+            <div class="instructions">
+                We can use a Punnett Square, shown below, to determine both the genotypic and phenotypic ratios
+                resulting from
+                this cross.
+            </div>
+            <div class="ps_flow">
+                <table class="ps">
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <th colspan="2" class="father"><span>Father</span></th>
+                    </tr>
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <td class="t-gamete">E</td>
+                        <td class="t-gamete">e</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2" class="mother"><span class="vert_text">Mother</span></th>
+                        <td class="l-gamete">e</td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                        <td>ee <img src="./ebony.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="l-gamete">e</td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                        <td>ee <img src="./ebony.png"></td>
+                    </tr>
+                </table>
+                <div class="column_flow">
+                    <div class="instructions">
+                        Count the number of each <strong>genotype</strong> present in the offspring of the cross,
+                        displayed in
+                        the Punnett Square below.
+                    </div>
+                    <span><strong>Genotypes</strong></span>
+                    <table class="ratios">
+                        <tr>
+                            <td>EE</td>
+                            <td><input type="number" id="h1" min="0" max="4" value="0" data-prefix="h" data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ee</td>
+                            <td><input type="number" id="h2" min="0" max="4" value="0" data-prefix="h" data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>ee</td>
+                            <td><input type="number" id="h3" min="0" max="4" value="0" data-prefix="h" data-postfix="g" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Genotypic ratio:</strong></span>
+                    <div id="hratiog" data-homodom="0" data-hetero="0" data-homorec="0">0:0:0</div>
+                </div>
+                <div id="hphenotype_placeholder" class="phenotype_placeholder"></div>
+                <div class="column_flow hidden fadein phenotype" id="parth2">
+                    <div class="instructions">
+                        Count the number of each <strong>phenotype</strong> present in the offspring of the cross,
+                        displayed in
+                        the Punnett Square below.
+                    </div>
+                    <span><strong>Phenotypes</strong></span>
+                    <table class="ratios phenotype">
+                        <tr>
+                            <td>wild-type <img src="./wildtype.png"></td>
+                            <td><input type="number" id="h4" min="0" max="4" value="0" data-prefix="h" data-postfix="p" /></td>
+                        </tr>
+                        <tr>
+                            <td><em>ebony</em> <img src="./ebony.png"></td>
+                            <td><input type="number" id="h5" min="0" max="4" value="0" data-prefix="h" data-postfix="p" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Phenotypic ratio:</strong></span>
+                    <div id="hratiop" data-wildtype="0" data-ebony="0">0:0</div>
+                </div>
+            </div>
+            <input type="button" id="hcheck" value="Check answer" data-stage="genotype" data-prefix="h" />
+            <div id="hfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in
+                red above.
+            </div>
+        </div>
+        <div id="parti" class="hidden fadein">
+            <p>In your own words, what do the genotypic and phenotypic ratios represent?</p>
+            <textarea id="i1"></textarea>
+            <div id="iexplanation" class="explanation hidden fadein">
+                <p>A genotypic ratio of 0:1:0 means that half of the offspring will have genotype Ee, while
+                    the other half will have genotype ee.</p>
+                <p>A phenotypic ratio of 1:1 means that half of the offspring will express the wild-type phenotype,
+                    while the other half will express the <em>ebony</em> phenotype.</p>
+            </div>
+            <input type="button" id="icheck" value="Continue" data-stage="textentry" data-prefix="i" />
+            <div id="ifeedback" class="feedback hidden fadein">That's a little short&mdash;could you expand a bit on
+                what you're
+                saying above?</div>
+        </div>
+        <div id="ijseparator" class="separator hidden"></div>
+
+        <div id="partj" class="hidden fadein">
+            <p>Now, we will move onto a different cross: mating a heterozygous fly (genotype Ee), with another
+                heterozygous fly (genotype Ee). This is known as a <strong>Monohybrid Cross</strong>.</p>
+            <div class="instructions">For each parent, type in all possible gamete genotypes in the boxes below each
+                fly.</div>
+            <div class="cross_flow">
+                <div><span><strong>Parental generation:</strong></span></div>
+                <div class="column_flow">
+                    <span><strong>Father</strong></span>
+                    <span>Ee</span>
+                    <img src="./wildtype.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="ja1" />
+                    <input type="text" placeholder="E (e.g.)" id="ja2" />
+                </div>
+                <div><span class="bigx">X</span></div>
+                <div class="column_flow">
+                    <span><strong>Mother</strong></span>
+                    <span>Ee</span>
+                    <img src="./wildtype.png"></img>
+                    <input type="text" placeholder="E (e.g.)" id="jb1" />
+                    <input type="text" placeholder="E (e.g.)" id="jb2" />
+                </div>
+            </div>
+            <input type="button" id="jcheck" value="Check answer" data-prefix="j" />
+            <div id="jfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in red
+                above.</div>
+        </div>
+        
+        <div id="partk" class="hidden fadein">
+            <div class="instructions">
+                We can use a Punnett Square, shown below, to determine both the genotypic and phenotypic ratios
+                resulting from
+                this cross.
+            </div>
+            <div class="ps_flow">
+                <table class="ps">
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <th colspan="2" class="father"><span>Father</span></th>
+                    </tr>
+                    <tr>
+                        <td class="borderless"></td>
+                        <td class="borderless"></td>
+                        <td class="t-gamete">E</td>
+                        <td class="t-gamete">e</td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2" class="mother"><span class="vert_text">Mother</span></th>
+                        <td class="l-gamete">E</td>
+                        <td>EE <img src="./wildtype.png"></td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                    </tr>
+                    <tr>
+                        <td class="l-gamete">e</td>
+                        <td>Ee <img src="./wildtype.png"></td>
+                        <td>ee <img src="./ebony.png"></td>
+                    </tr>
+                </table>
+                <div class="column_flow">
+                    <div class="instructions">
+                        Count the number of each <strong>genotype</strong> present in the offspring of the cross,
+                        displayed in
+                        the Punnett Square below.
+                    </div>
+                    <span><strong>Genotypes</strong></span>
+                    <table class="ratios">
+                        <tr>
+                            <td>EE</td>
+                            <td><input type="number" id="k1" min="0" max="4" value="0" data-prefix="k" data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>Ee</td>
+                            <td><input type="number" id="k2" min="0" max="4" value="0" data-prefix="k" data-postfix="g" /></td>
+                        </tr>
+                        <tr>
+                            <td>ee</td>
+                            <td><input type="number" id="k3" min="0" max="4" value="0" data-prefix="k" data-postfix="g" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Genotypic ratio:</strong></span>
+                    <div id="kratiog" data-homodom="0" data-hetero="0" data-homorec="0">0:0:0</div>
+                </div>
+                <div id="kphenotype_placeholder" class="phenotype_placeholder"></div>
+                <div class="column_flow hidden fadein phenotype" id="partk2">
+                    <div class="instructions">
+                        Count the number of each <strong>phenotype</strong> present in the offspring of the cross,
+                        displayed in
+                        the Punnett Square below.
+                    </div>
+                    <span><strong>Phenotypes</strong></span>
+                    <table class="ratios phenotype">
+                        <tr>
+                            <td>wild-type <img src="./wildtype.png"></td>
+                            <td><input type="number" id="k4" min="0" max="4" value="0" data-prefix="k" data-postfix="p" /></td>
+                        </tr>
+                        <tr>
+                            <td><em>ebony</em> <img src="./ebony.png"></td>
+                            <td><input type="number" id="k5" min="0" max="4" value="0" data-prefix="k" data-postfix="p" /></td>
+                        </tr>
+                    </table>
+                    <span><strong>Phenotypic ratio:</strong></span>
+                    <div id="kratiop" data-wildtype="0" data-ebony="0">0:0</div>
+                </div>
+            </div>
+            <input type="button" id="kcheck" value="Check answer" data-stage="genotype" data-prefix="k" />
+            <div id="kfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in
+                red above.
+            </div>
+        </div>
+        <div id="partl" class="hidden fadein">
+            <p>In your own words, what do the genotypic and phenotypic ratios represent?</p>
+            <textarea id="l1"></textarea>
+            <div id="lexplanation" class="explanation hidden fadein">
+                <p>A genotypic ratio of 1:2:1 means that 1/4 of the offspring will have genotype EE,
+                    1/2 will have genotype Ee, and 1/4 will have genotype ee.
+                </p>
+                <p>A phenotypic ratio of 3:1 means that 3/4 of the offspring will express the wild-type phenotype,
+                    while 1/4 will express the <em>ebony</em> phenotype.</p>
+            </div>
+            <input type="button" id="lcheck" value="Continue" data-stage="textentry" data-prefix="l" />
+            <div id="lfeedback" class="feedback hidden fadein">That's a little short&mdash;could you expand a bit on
+                what you're
+                saying above?</div>
+        </div>
+        <div id="partm" class="hidden">You've successfully completed this activity. At this point, you should be able to explain
+            what genotypic and phenotypic ratios mean. 
+        How can you use these ratios to predict the results of another monohybrid cross, with different genes and
+        alleles?</div>
+
+        <div id="whitespacefix" style="clear: both; margin: 0; height: 2em;"> </div>
+    </div>
+
+
+
+    <script src="monohybrid.js"></script>
+</body>
+
+</html>

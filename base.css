@@ -1,0 +1,156 @@
+/* common CSS between dihybrid, monohybrid, linkage -- keeps things
+   consistent more easily */
+
+* {
+    box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+div.fadein, td.fadein {
+    animation: fadeIn 0.5s;
+}
+
+
+.hidden,
+div.column_flow.hidden,
+input[type="button"].hidden,
+div.separator.hidden,
+div#content > div.separator.hidden {
+    display: none;
+}
+
+body {
+    background-color: lightgray;
+    display: flex;
+    /* fixes bar at bottom of page somehow... */
+}
+
+p {
+    margin: 0;
+    padding: 0.5em 0;
+}
+
+div#content h1 {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0.5em;
+}
+
+div#content h3 {
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
+}
+
+div#content {
+    width: 80%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: auto;
+    background-color: white;
+    min-height: 100vh;
+}
+
+div#content>* {
+    margin: 1rem 0;
+}
+
+input.highlighted,
+textarea.highlighted,
+select.highlighted {
+    border: 3px red solid;
+}
+
+input.unhighlighted,
+textarea.unhighlighted,
+select.unhighlighted {
+    border: 3px gray solid;
+}
+
+th.highlighted {
+    box-shadow: inset 0 0 0px 3px red;
+}
+
+th.unhighlighted {
+    box-shadow: inset 0 0 0px 3px gray;
+}
+
+img.highlighted {
+    box-shadow: 0 0 0 3px red;
+}
+
+img.unhighlighted {
+    box-shadow: 0 0 0 3px gray;
+}
+
+.instructions {
+    border: 1px solid black;
+    padding: 5px;
+    margin-bottom: 1em;
+}
+
+.feedback {
+    color: darkred;
+    margin-top: 0.5em;
+}
+
+.explanation {
+    color: darkblue;
+    margin-top: 0.5em;
+    border: solid darkblue thin;
+    padding: 5px;
+}
+
+.vert_text {
+    transform: rotate(-90deg);
+    display: inline-block;
+}
+
+
+input[type="text"],
+input[type="number"],
+select {
+    padding: 3px;
+}
+
+input[type="button"] {
+    margin: 10px auto;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 5px;
+    display: block;
+    box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+input[type="button"][disabled] {
+    box-shadow: none;
+    color: lightgray;
+}
+
+div.separator,
+div#content > div.separator {
+    width: 80%;
+    margin: 15px auto;
+    display: block;
+    height: 2px;
+    background: black;
+}
+
+
+.small_text {
+    font-size: 0.8em;
+}
+
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}

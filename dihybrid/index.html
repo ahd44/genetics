@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dihybrid Cross</title>
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../base.css">
+    <link rel="stylesheet" type="text/css" href="dihybrid.css">
+
+</head>
+
+<body>
+    <div id="content">
+        <h1>Exploring Genotypic and Phenotypic Ratios<br />
+            in a Dihybrid Cross</h1>
+
+        <div id="parta">
+            <p>In this activity, we will be investigating two genes in the fruit fly, <em>Drosophila melanogaster</em>.
+                The first gene, <em>ebony</em> (e), controls body coloration,
+                and the second gene, <em>apterous</em> (a), determines wing development.</p>
+
+
+            <p>When expressed in the homozygous recessive genotype,
+                the recessive allele (e) for the <em>ebony</em> gene results
+                in an <strong>ebony-colored body</strong> phenotype.</p>
+
+            <p>When expressed in the homozygous recessive genotype,
+                the recessive allele (a) for the <em>apterous</em> gene results
+                in a <strong>wingless</strong> phenotype.</p>
+
+            <div class="instructions"><span class="listnumber">1)</span> Based on the information
+                given above, enter <strong>ALL</strong> genotypes which correspond to the displayed phenotype
+                below.</div>
+
+            <div class="box_flow four">
+                <div class="empty"></div>
+                <div class="fly_text"><span>wild-type</span></div>
+                <div class="empty"></div>
+                <div class="fly_text"><span><em>apterous</em></span></div>
+
+                <div class="inputs">
+                    <input type="text" id="a_wt_1" placeholder="eeAa (e.g.)" />
+                    <input type="text" id="a_wt_2" placeholder="eeAa (e.g.)" />
+                    <input type="text" id="a_wt_3" placeholder="eeAa (e.g.)" />
+                    <input type="text" id="a_wt_4" placeholder="eeAa (e.g.)" />
+                </div>
+                <div class="fly">
+                    <img src="wildtype.png">
+                </div>
+                <div class="inputs">
+                    <input type="text" id="a_ap_1" placeholder="eeAa (e.g.)" />
+                    <input type="text" id="a_ap_2" placeholder="eeAa (e.g.)" />
+                </div>
+                <div class="fly">
+                    <img src="apterous.png">
+                </div>
+
+                <div class="empty"></div>
+                <div class="fly_text"><span><em>ebony</em></span></div>
+                <div class="empty"></div>
+                <div class="fly_text"><span><em>ebony</em> and <em>apterous</em></span></div>
+
+
+                <div class="inputs">
+                    <input type="text" id="a_eb_1" placeholder="eeAa (e.g.)" />
+                    <input type="text" id="a_eb_2" placeholder="eeAa (e.g.)" />
+                </div>
+                <div class="fly">
+                    <img src="ebony.png">
+                </div>
+
+                <div class="inputs">
+                    <input type="text" id="a_ebap_1" placeholder="eeAa (e.g.)" />
+                </div>
+                <div class="fly">
+                    <img src="ebonyapterous.png">
+                </div>
+            </div>
+
+
+            <input type="button" id="acheck" value="Check answer" />
+            <div id="afeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+                highlighted in red above.</div>
+
+        </div> <!-- end parta -->
+        <div id="binstructions" class="hidden fadein">
+            <p>We will now perform a cross of two flies of known genotype, which are shown below.
+                Both flies are heterozygous for both the <em>ebony</em> and the <em>apterous</em> genes.</p>
+
+            <div class="instructions"><span class="listnumber">2)</span> To predict the results of this cross,
+                we need to figure out the <strong>gamete genotypes</strong> produced by each parental fly.
+                Below, type the gamete genotypes you expect each parent to produce.</div>
+        </div>
+
+        <div id="cinstructions" class="instructions hidden fadein"><span class="listnumber">3)</span> Great! Now, place the <strong>gamete
+                genotypes</strong>
+            into the Punnett Square below by <strong>dragging and dropping</strong> the labels into the dropzones,
+            indicated
+            by dashed boxes. (Or, you can click on a label to select it, and then click on the indicated dropzone.)</div>
+        
+        <div class="two_column_main in_part_b" id="partbc_flex">
+            <div id="partb" class="hidden fadein">
+                <div class="box_flow two"> <!-- gamete genotypes - belongs to partb! -->
+                    <div class="header_text">
+                        Father
+                    </div>
+                    <div class="header_text">
+                        Mother
+                    </div>
+                    <div class="fly">
+                        <img src="wildtype.png">
+                    </div>
+                    <div class="fly">
+                        <img src="wildtype.png">
+                    </div>
+                    <div class="fly_text">
+                        EeAa
+                    </div>
+                    <div class="fly_text">
+                        EeAa
+                    </div>
+                    <div class="inputs" id="father_gamete_box">
+                        <input type="text" id="b_f1" placeholder="eA (e.g.)" />
+                        <input type="text" id="b_f2" placeholder="eA (e.g.)" />
+                        <input type="text" id="b_f3" placeholder="eA (e.g.)" />
+                        <input type="text" id="b_f4" placeholder="eA (e.g.)" />
+                        <div class="hidden fadein draggable father gg" id="b_f1_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_f1_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden fadein draggable father gg" id="b_f2_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_f2_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden fadein draggable father gg" id="b_f3_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_f3_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden fadein draggable father gg" id="b_f4_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_f4_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                    </div>
+                    <div class="inputs" id="mother_gamete_box">
+                        <input type="text" id="b_m1" placeholder="eA (e.g.)" />
+                        <input type="text" id="b_m2" placeholder="eA (e.g.)" />
+                        <input type="text" id="b_m3" placeholder="eA (e.g.)" />
+                        <input type="text" id="b_m4" placeholder="eA (e.g.)" />
+                        <div class="hidden fadein draggable mother gg" id="b_m1_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_m1_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden fadein draggable mother gg" id="b_m2_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_m2_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden fadein draggable mother gg" id="b_m3_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_m3_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden fadein draggable mother gg" id="b_m4_div" draggable="true" tabindex="0">
+                            <div class="gamete"></div>
+                        </div>
+                        <div class="hidden placeholder gg" id="b_m4_div_ph">
+                            <div class="gamete"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <input type="button" id="bcheck" value="Check answer" />
+                
+            </div>
+            <div id="partc" class="hidden fadein">
+                
+            
+                <table class="ps_dihybrid in_part_c">
+                    <tr>
+                        <th class="empty"></th>
+                        <th class="empty"></th>
+                        <th class="header" colspan="4">Father</th>
+                    </tr>
+                    <tr>
+                        <th class="empty"></th>
+                        <th class="empty"></th>
+                        <th class="gametedropzone" scope="col" id="gdz_f1" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <th class="gametedropzone" scope="col" id="gdz_f2" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <th class="gametedropzone" scope="col" id="gdz_f3" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <th class="gametedropzone" scope="col" id="gdz_f4" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="header" rowspan="4"><span class="vert_text">Mother</span></th>
+                        <th class="gametedropzone vert" scope="row" id="gdz_m1" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <td id="fz11" class="flyzone" data-f="1" data-m="1"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_11" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_11" />
+                        </td>
+                        <td id="fz21" class="flyzone" data-f="2" data-m="1"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_21" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_21" />
+                        </td>
+                        <td id="fz31" class="flyzone" data-f="3" data-m="1"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_31" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_31" />
+                        </td>
+                        <td id="fz41" class="flyzone" data-f="4" data-m="1"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_41" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_41" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="gametedropzone vert" scope="row" id="gdz_m2" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <td id="fz12" class="flyzone" data-f="1" data-m="2"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_12" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_12" />
+                        </td>
+                        <td id="fz22" class="flyzone" data-f="2" data-m="2"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_22" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_22" />
+                        </td>
+                        <td id="fz32" class="flyzone" data-f="3" data-m="2"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_32" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_32" />
+                        </td>
+                        <td id="fz42" class="flyzone" data-f="4" data-m="2"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_42" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_42" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="gametedropzone vert" scope="row" id="gdz_m3" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <td id="fz13" class="flyzone" data-f="1" data-m="3"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_13" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_13" />
+                        </td>
+                        <td id="fz23" class="flyzone" data-f="2" data-m="3"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_23" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_23" />
+                        </td>
+                        <td id="fz33" class="flyzone" data-f="3" data-m="3"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_33" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_33" />
+                        </td>
+                        <td id="fz43" class="flyzone" data-f="4" data-m="3"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_43" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_43" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="gametedropzone vert" scope="row" id="gdz_m4" tabindex="0">
+                            <div class="dropzone_indicator"></div>
+                        </th>
+                        <td id="fz14" class="flyzone" data-f="1" data-m="4"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_14" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_14" />
+                        </td>
+                        <td id="fz24" class="flyzone" data-f="2" data-m="4"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_24" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_24" />
+                        </td>
+                        <td id="fz34" class="flyzone" data-f="3" data-m="4"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_34" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_34" />
+                        </td>
+                        <td id="fz44" class="flyzone" data-f="4" data-m="4"><span class="genotype_label">Genotype:</span>
+                            <input type="text" id="d_44" placeholder="EeAa (e.g.)" />
+                            <img class="phenotype_changeable" src="blank.png" data-src="blank.png" id="e_44" />
+                        </td>
+                    </tr>
+                </table>
+            
+                
+            
+                <input type="button" id="ccheck" value="Check answer" />
+                
+            </div> <!-- end partc -->
+        </div>
+
+        <div class="instructions hidden fadein" id="dinstructions"><span class="listnumber">4)</span> Now, enter
+            the <strong>genotypes</strong> of the potential
+            offspring in the Punnett Square by typing them into the boxes in each cell.</div>
+        <div class="instructions hidden fadein" id="einstructions"><span class="listnumber">5)</span> Fantastic!
+            Click on the box below each genotype to cycle through
+            the potential offspring <strong>phenotypes</strong>. Refer to Step 1, at the top of the page, to refresh
+            your memory
+            of which genotype produces which phenotype.</div>
+        <div id="bfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+            highlighted in red
+            above.</div>
+        <div id="cfeedback" class="feedback hidden fadein">Sorry, that answer is incorrect. Fix the answers
+            highlighted in red
+            above.</div>
+        
+        <div class="two_column_main">
+            <div id="partf" class="hidden fadein">
+                <div class="instructions"><span class="listnumber">6)</span> Let's examine the <strong>genotypic
+                        ratio</strong>
+                    of the offspring of this dihybrid cross. Count the number of times each genotype occurs in the
+                    Punnett Square above,
+                    then enter the number into the box to the right of the genotype below.</div>
+
+                <div class="enotypic_ratios">
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">EEAA</div>
+                        <input type="number" id="gr_f1" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">EeAA</div>
+                        <input type="number" id="gr_f2" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">EEAa</div>
+                        <input type="number" id="gr_f3" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">EeAa</div>
+                        <input type="number" id="gr_f4" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">eeAA</div>
+                        <input type="number" id="gr_f5" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">eeAa</div>
+                        <input type="number" id="gr_f6" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">EEaa</div>
+                        <input type="number" id="gr_f7" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">Eeaa</div>
+                        <input type="number" id="gr_f8" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <div class="g_ratio_label">eeaa</div>
+                        <input type="number" id="gr_f9" min="0" max="16" />
+                    </div>
+                </div>
+
+                <input type="button" id="fcheck" value="Check answer" />
+            </div>
+            <div id="partg" class="hidden fadein">
+                <div class="instructions"><span class="listnumber">7)</span> Now let's examine the <strong>phenotypic
+                        ratio</strong>
+                    of the offspring of this dihybrid cross. Count the number of times each phenotype occurs in the
+                    Punnett Square above,
+                    and enter the number into the box to the right of the phenotype below.</div>
+
+                <div class="enotypic_ratios">
+                    <div class="ratio_flow">
+                        <img class="p_ratio_label" src="wildtype.png" />
+                        <input type="number" id="pr_g1" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <img class="p_ratio_label" src="ebony.png" />
+                        <input type="number" id="pr_g2" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <img class="p_ratio_label" src="apterous.png" />
+                        <input type="number" id="pr_g3" min="0" max="16" />
+                    </div>
+                    <div class="ratio_flow">
+                        <img class="p_ratio_label" src="ebonyapterous.png" />
+                        <input type="number" id="pr_g4" min="0" max="16" />
+                    </div>
+                </div>
+
+                <input type="button" id="gcheck" value="Check answer" />
+            </div>
+        </div>
+        <div id="ffeedback" class="feedback hidden fadein ">Sorry, that answer is incorrect. Fix the answers
+            highlighted in red
+            above.</div>
+        <div id="lmseparator" class="separator hidden"></div>
+        <div id="endtext" class="instructions hidden fadein">You've successfully completed this activity. What do the genotypic and
+            phenotypic ratios mean?
+            How can you use these ratios to predict the results of another dihybrid cross, with different genes and
+            alleles?</div>
+        <div id="whitespacefix" style="clear: both; margin: 0; height: 2em;"> </div>
+    </div> <!-- end content -->
+    <script src="dihybrid.js"></script>
+</body>
+
+</html>

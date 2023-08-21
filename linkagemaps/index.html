@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Linkage Maps</title>
+    <link rel="stylesheet" type="text/css" href="../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../base.css">
+    <link rel="stylesheet" type="text/css" href="linkage.css">
+
+</head>
+
+<body>
+    <div id="null_hypothesis"><strong>Our null hypothesis:</strong> <span id="nh_genelabel">Both selected genes</span> assort independently</div>
+    <div id="content">
+        <div class="spacer"> </div>
+        <h1>Linkage Maps</h1>
+        <div id="parta">
+            <div class="instructions">
+                <h3><span class="listnumber">1)</span> Select genes for the parental cross.</h3>
+                <p>Assume our parental flies are <strong>homozygous recessive</strong> for the shown trait, but
+                    <strong>homozygous dominant</strong> (wild-type) for every other trait.
+                </p>
+                <p>Select two flies to cross by clicking on them, to simulate placing the two flies into a vial together
+                    to breed.</p>
+            </div>
+
+            <div class="fly_selection">
+                <div class="flygp">
+                    <div class="genotype_label"><em>dachshund</em> (d)</div>
+                    <img class="phenotype clickable" id="a_dachshund" src="dachshund.png" data-phenotype="dachshund"
+                        draggable="false" />
+                </div>
+                <div class="flygp">
+                    <div class="genotype_label"><em>cinnabar</em> (c)</div>
+                    <img class="phenotype clickable" id="a_cinnabar" src="cinnabar.png" data-phenotype="cinnabar"
+                        draggable="false" />
+                </div>
+                <div class="flygp">
+                    <div class="genotype_label"><em>black body</em> (b)</div>
+                    <img class="phenotype clickable" id="a_blackbody" src="blackbody.png" data-phenotype="blackbody"
+                        draggable="false" />
+                </div>
+                <div class="flygp">
+                    <div class="genotype_label"><em>vestigial</em> (v)</div>
+                    <img class="phenotype clickable" id="a_vestigial" src="vestigial.png" data-phenotype="vestigial"
+                        draggable="false" />
+                </div>
+            </div>
+
+            <input type="button" value="Continue" id="acheck" disabled />
+        </div>
+        <div id="partb" class="hidden fadein">
+            <div class="instructions">
+                <p>What are the <strong>gamete genotypes</strong> produced in the parental generation
+                    by meiosis?</p>
+            </div>
+
+            <div class="box_flow two"> <!-- gamete genotypes - belongs to partb! -->
+                <div class="header_text">
+                    Father
+                </div>
+                <div class="header_text">
+                    Mother
+                </div>
+                <div class="fly" id="b_p1">
+                    <img src="wildtype.png" class="phenotype">
+                </div>
+                <div class="fly" id="b_p2">
+                    <img src="wildtype.png" class="phenotype">
+                </div>
+                <div class="fly_text" id="b_g1">
+
+                </div>
+                <div class="fly_text" id="b_g2">
+
+                </div>
+                <div class="inputs">
+                    <input type="text" id="b_gg1" placeholder="cV (e.g.)" class="allele-input" />
+                </div>
+                <div class="inputs">
+                    <input type="text" id="b_gg2" placeholder="cV (e.g.)" class="allele-input" />
+                </div>
+            </div>
+
+
+            <input type="button" id="bcheck" value="Check answer" />
+<div id="bfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+        <div id="partc" class="hidden fadein">
+            <div class="instructions">
+                <p>You will now begin examining the <strong>F1 generation</strong>, the offspring
+                    from the parental flies you selected above.</p>
+                <p>Click the Cross button below to simulate the 7-day period from mating to adult fly emergence.</p>
+            </div>
+            <input type="button" id="ccheck" value="Cross" />
+            <div id="day_counter" data-days="7" data-ticks="0">
+                7 days...
+            </div>
+            <progress id="day_progress" max="7" value="0"></progress>
+        </div>
+        <div id="partd" class="hidden fadein">
+            <div class="separator"></div>
+            <div class="instructions">
+                <h3><span class="listnumber">2)</span> Make predictions about the gametes produced by F1</h3>
+                <p>Well, those 7 days flew by, and the F1 generation flies are here!</p>
+                <p>Let's examine the gametes we expect the F1 generation to produce by filling in the table below.</p>
+                </p>
+            </div>
+            <table id="dtable" class="gamete_predictions stage1 fadein">
+                <tr>
+                    <th class="f1_header">F1:</th>
+                    <th class="gg_header">Expected gamete genotype under our null hypothesis of independent assortment
+                    </th>
+                    <th class="freq_header">Expected frequency of each gamete genotype under our null hypothesis of
+                        independent assortment
+                    </th>
+                    <th class="recomb_header">Which gamete genotypes are parental (same as the gamete genotypes produced
+                        by parents) and which
+                        are recombinant (different from parents)?</th>
+                </tr>
+                <tr>
+                    <th rowspan="4"><img class="phenotype" src="wildtype.png" /></td>
+                    <td><input type="text" id="d_gg_number1" placeholder="cV (e.g.)" class="allele-input" /></td>
+                    <td><input type="text" id="d_gg_freq1" /></td>
+                    <td><select type="text" name="d_gg_pr1" id="d_gg_pr1">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="d_gg_number2" placeholder="cV (e.g.)" class="allele-input" /></td>
+                    <td><input type="text" id="d_gg_freq2" /></td>
+                    <td><select type="text" name="d_gg_pr2" id="d_gg_pr2">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="d_gg_number3" placeholder="cV (e.g.)" class="allele-input" /></td>
+                    <td><input type="text" id="d_gg_freq3" /></td>
+                    <td><select type="text" name="d_gg_pr3" id="d_gg_pr3">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="d_gg_number4" placeholder="cV (e.g.)" class="allele-input" /></td>
+                    <td><input type="text" id="d_gg_freq4" /></td>
+                    <td><select type="text" name="d_gg_pr4" id="d_gg_pr4">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+            </table>
+            <input type="button" id="dcheck" value="Check answer" data-stage="1" />
+<div id="dfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+        <div id="parte" class="hidden fadein">
+            <div class="instructions">
+                <p>Now that we know about the gametes produced by an F1 individual, we can begin thinking about
+                    how we might test our null hypothesis.</p>
+
+                <p>To continue, please enter the password provided in class.</p>
+            </div>
+
+            <input type="text" id="e_password" />
+
+            <input type="button" id="echeck" value="Continue" />
+<div id="efeedback" class="hidden fadein feedback">Sorry, that is not the correct password.</div>
+        </div>
+
+        <div id="partf" class="hidden fadein">
+            <div class="separator"></div>
+
+            <div class="instructions">
+                <h3><span class="listnumber">3)</span> Set up a test cross to test the null hypothesis</h3>
+                <p>We will now perform a test cross in order to test our null hypothesis. A <strong>test cross</strong>
+                    is a cross performed in order to visualize the gamete genotypes produced by an individual. </p>
+                <p>In order to do that, we will need a fly with a specific genotype which, when crossed with the F1 fly,
+                    will
+                    visually distinguish the offspring created from the different gamete genotypes. What is the genotype
+                    of
+                    the test cross fly you would cross with the F1 individual above?
+                </p>
+            </div>
+
+            <input type="text" placeholder="CcVv (e.g.)" id="f_genotype" class="genotype-input" />
+
+            <input type="button" id="fcheck" value="Check answer" />
+<div id="ffeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+
+        </div>
+        <!-- note: there is no partg, it was eliminated -->
+        <div id="parth" class="hidden fadein">
+            <div class="box_flow two">
+                <div class="header_text">
+                    Test cross fly
+                    <span id="h_label1"></span>
+                </div>
+                <div class="header_text">
+                    F1
+                    <span id="h_label2"></span>
+                </div>
+                <div class="fly">
+                    <img class="phenotype" id="h_img1" src="dachshund_cinnabar.png" />
+                </div>
+                <div class="fly">
+                    <img class="phenotype" src="wildtype.png" />
+                </div>
+            </div>
+            <div class="instructions">
+                We will now make predictions about the offspring produced by the test cross, using the flies pictured above.
+            </div>
+            <table id="htable" class="gamete_predictions stage1">
+                <tr>
+                    <th class="gg_header">Which full genotypes do you expect to find among the offspring produced by
+                        this cross?</th>
+                    <th class="freq_header">Expected frequency of each genotype under our null hypothesis of independent
+                        assortment
+                    </th>
+                    <th class="recomb_header">Which genotypes are parental (result from parental gamete genotype) and
+                        which
+                        are recombinant (result from recombinant gamete genotype)?</th>
+                </tr>
+                <tr>
+                    <td><input type="text" id="h_gg_number1" placeholder="ccVv (e.g.)" class="genotype-input" /></td>
+                    <td><input type="text" id="h_gg_freq1" /></td>
+                    <td><select type="text" name="h_gg_pr1" id="h_gg_pr1">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="h_gg_number2" placeholder="ccVv (e.g.)" class="genotype-input" /></td>
+                    <td><input type="text" id="h_gg_freq2" /></td>
+                    <td><select type="text" name="h_gg_pr2" id="h_gg_pr2">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="h_gg_number3" placeholder="ccVv (e.g.)" class="genotype-input" /></td>
+                    <td><input type="text" id="h_gg_freq3" /></td>
+                    <td><select type="text" name="h_gg_pr3" id="h_gg_pr3">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="h_gg_number4" placeholder="ccVv (e.g.)" class="genotype-input" /></td>
+                    <td><input type="text" id="h_gg_freq4" /></td>
+                    <td><select type="text" name="h_gg_pr4" id="h_gg_pr4">
+                            <option value="none"> </option>
+                            <option value="parental">Parental</option>
+                            <option value="recombinant">Recombinant</option>
+                        </select></td>
+                </tr>
+            </table>
+
+            <input type="button" id="hcheck" value="Check answer" data-stage="1" />
+<div id="hfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+        <div id="parti" class="hidden fadein">
+            <div class="instructions">
+                What are the expected parental and recombinant frequencies, under our null hypothesis?
+            </div>
+            <div class="box_flow two short">
+                <div>Parental frequency: </div>
+                <input type="text" id="i_parental" />
+
+                <div>Recombinant frequency: </div>
+                <input type="text" id="i_recombinant" />
+            </div>
+            <input type="button" id="icheck" value="Check answer" />
+<div id="ifeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+        <div id="partj" class="hidden fadein">
+            <div class="instructions">
+                <p>These are our predictions of expected genotypic frequencies <strong>IF</strong> our
+                   null hypothesis of independent assortment is correct.</p>
+                   <p>Please write down the <strong>parental and recombinant genotypes and phenotypes</strong>
+                    as well as the <strong>expected frequencies of each genotype/phenotype</strong>, in your notes before continuing.
+                   </p>
+                   <p>
+                    You should have noticed that each genotype corresponds to a unique phenotype (thus why our
+                    test cross fly was chosen). When we examine the offspring of the test cross, we will be able to infer the genotype of each
+                    fly based on its phenotype.
+                   </p>
+                   <p>Now, we will examine the offspring of the test cross. Enter the password (given in class) below, and then click the Cross
+                    button below to simulate the 7 day period from mating to adult fly emergence.</p>
+                    
+            </div>
+            <input type="text" id="j_password" />
+            <input type="button" id="jcheck" value="Cross" />
+            <div id="day_counter2" data-days="7" data-ticks="0">
+                7 days...
+            </div>
+            <progress id="day_progress2" max="7" value="0"></progress>
+<div id="jfeedback" class="hidden fadein feedback">Sorry, that is not the correct password.</div>
+        </div>
+        <div id="partk" class="hidden fadein">
+            <div class="separator"></div>
+
+            <div class="instructions">
+                <h3><span class="listnumber">4)</span> Collect results from the test cross</h3>
+                <p>The progeny from the test cross is shown below. Count the number of each phenotype you see,
+                    and enter the number into the box below.
+                    </em>
+                </p>
+            </div>
+
+            <div id="k_progeny">
+                <!-- to do? -->
+            </div>
+
+            <div class="box_flow four">
+                <img id="k_p1" src="wildtype.png" class="phenotype" />
+                <img id="k_p2" src="wildtype.png" class="phenotype" />
+                <img id="k_p3" src="wildtype.png" class="phenotype" />
+                <img id="k_p4" src="wildtype.png" class="phenotype" />
+
+                <div class="inputs">
+                    <input type="number" min="0" max="56" id="k_number1" />
+                </div>
+                <div class="inputs">
+                    <input type="number" min="0" max="56" id="k_number2" />
+                </div>
+                <div class="inputs">
+                    <input type="number" min="0" max="56" id="k_number3" />
+                </div>
+                <div class="inputs">
+                    <input type="number" min="0" max="56" id="k_number4" />
+                </div>
+            </div>
+
+            <input type="button" id="kcheck" value="Check answer" />
+<div id="kfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+
+        </div>
+        <div id="partl" class="hidden fadein">
+            <div class="instructions">
+                What are the <strong>observed</strong> parental and recombinant frequencies from our test cross?
+            </div>
+            <div class="box_flow two short">
+                <div>Parental frequency: </div>
+                <input type="text" id="l_parental" />
+
+                <div>Recombinant frequency: </div>
+                <input type="text" id="l_recombinant" />
+            </div>
+            <input type="button" id="lcheck" value="Check answer" />
+<div id="lfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+
+        <div id="partm" class="hidden fadein">
+            <div class="instructions">
+                <p>Write down the <strong>observed parental and recombinant frequencies</strong> in your notes.</p>
+                <p>Then, enter the password provided in class below, and click "Continue".</p>
+            </div>
+            <input type="text" id="m_password" />
+            <input type="button" id="mcheck" value="Continue" />
+<div id="mfeedback" class="hidden fadein feedback">Sorry, that is not the correct password.</div>
+        </div>
+
+        <div id="partn" class="hidden fadein chi_square">
+            <h3><span class="listnumber">5)</span> Analyze results from the test cross using the Chi-square test</h3>
+            <div class="instructions">
+                As you did in the pre-lecture activity, we will be performing a Chi-square test to determine whether
+                we <strong>reject</strong> or <strong>fail to reject</strong> our null hypothesis (that the genes independently assort).
+                The table below is mostly filled in for you, based on your results (above).
+                Please enter in the missing values below.
+            </div>
+            <table>
+                <tr class="darkblue">
+                    <th class="midblue"></th>
+                    <th colspan="2">Recombinant</th>
+                    <th colspan="2">Parental</th>
+                    <th rowspan="4">TOTAL</th>
+                </tr>
+                <tr class="midblue">
+                    <th class="darkblue">Genotype:</th>
+                    <th id="n_g1"></th>
+                    <th id="n_g2"></th>
+                    <th id="n_g3"></th>
+                    <th id="n_g4"></th>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">Observed Frequency</td>
+                    <td id="n_f1"></td>
+                    <td id="n_f2"></td>
+                    <td id="n_f3"></td>
+                    <td id="n_f4"></td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">Expected Frequency</td>
+                    <td>0.25</td>
+                    <td>0.25</td>
+                    <td>0.25</td>
+                    <td>0.25</td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">Observed number of offspring resulting from gametes (frequency * 56)</td>
+                    <td id="n_off1"></td>
+                    <td id="n_off2"></td>
+                    <td id="n_off3"></td>
+                    <td id="n_off4"></td>
+                    <td>56</td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">Expected number of offspring resulting from gametes (frequency * 56)</td>
+                    <td><input type="text" id="n_ex1"></td>
+                    <td><input type="text" id="n_ex2"></td>
+                    <td><input type="text" id="n_ex3"></td>
+                    <td><input type="text" id="n_ex4"></td>
+                    <td>56</td>
+                </tr>
+            </table>
+            <div class="instructions">When you've entered your answers and examined the above table to understand where
+                each
+                entry comes
+                from, click on the button below to continue.</div>
+            <input type="button" id="ncheck" value="Check answers" />
+<div id="nfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+        <div id="parto" class="hidden fadein chi_square">
+            <div class="instructions">
+                We will now calculate the chi-square statistic for each of our genotypes, and then calculate the
+                total
+                chi-square statistic by summing all of the individual Chi-square statistics.
+                <strong>Enter your value below, rounding to TWO decimal places.</strong>
+            </div>
+            <table>
+                <tr>
+                    <th class="midblue"></th>
+                    <th colspan="2" class="darkblue">Recombinant</th>
+                    <th colspan="2" class="darkblue">Parental</th>
+                </tr>
+                <tr class="midblue">
+                    <th class="darkblue">Genotype:</th>
+                    <th id="o_g1"></th>
+                    <th id="o_g2"></th>
+                    <th id="o_g3"></th>
+                    <th id="o_g4"></th>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">Chi-square statistic calculation: (O-E)&sup2;/E</td>
+                    <td id="o_csc1"></td>
+                    <td id="o_csc2"></td>
+                    <td id="o_csc3"></td>
+                    <td id="o_csc4"></td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">Chi-square statistic:</td>
+                    <td><input type="text" id="o_css1"></td>
+                    <td><input type="text" id="o_css2"></td>
+                    <td><input type="text" id="o_css3"></td>
+                    <td><input type="text" id="o_css4"></td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="darkblue">TOTAL Chi-square statistic:</td>
+                    <td colspan="4"><input type="text" id="o_csstotal"></td>
+                </tr>
+            </table>
+            <div class="instructions">When you have entered all of the values, click the button below to continue.</div>
+            <input type="button" id="ocheck" value="Check answers" />
+<div id="ofeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+
+        </div>
+        <div id="partp" class="hidden fadein chi_square">
+            <div class="instructions">
+                Using the table below, find the p-value that corresponds to the total Chi-square statistic recorded
+                above. When
+                found, enter it in the box below the table.
+                <strong>Degrees of freedom are always the number of possible events minus 1. In our case, we had four
+                    possible events
+                    (genotypes) that could occur. So our degrees of freedom for this experiment is: 4-1 = 3.</strong>
+            </div>
+            <table>
+                <tr>
+                    <td class="midblue">
+                    </td>
+                    <td class="darkblue" colspan="10">
+                        Probability (p) that differences between observed and expected are due to chance alone
+                    </td>
+                </tr>
+                <tr class="midblue">
+                    <td class="darkblue">degrees of freedom</td>
+                    <td>0.95</td>
+                    <td>0.90</td>
+                    <td>0.80</td>
+                    <td>0.70</td>
+                    <td>0.50</td>
+                    <td>0.30</td>
+                    <td>0.20</td>
+                    <td>0.10</td>
+                    <td>0.05</td>
+                    <td>0.01</td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">1</td>
+                    <td>0.004</td>
+                    <td>0.02</td>
+                    <td>0.06</td>
+                    <td>0.15</td>
+                    <td>0.46</td>
+                    <td>1.07</td>
+                    <td>1.64</td>
+                    <td>2.71</td>
+                    <td>3.84</td>
+                    <td>6.64</td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">2</td>
+                    <td>0.1</td>
+                    <td>0.21</td>
+                    <td>0.45</td>
+                    <td>0.71</td>
+                    <td>1.39</td>
+                    <td>2.41</td>
+                    <td>3.22</td>
+                    <td>4.60</td>
+                    <td>5.99</td>
+                    <td>9.21</td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">3</td>
+                    <td>0.35</td>
+                    <td>0.58</td>
+                    <td>1.01</td>
+                    <td>1.42</td>
+                    <td>2.37</td>
+                    <td>3.66</td>
+                    <td>4.64</td>
+                    <td>6.25</td>
+                    <td>7.82</td>
+                    <td>11.34</td>
+                </tr>
+                <tr class="lightblue">
+                    <td class="midblue">4</td>
+                    <td>0.71</td>
+                    <td>1.06</td>
+                    <td>1.65</td>
+                    <td>2.20</td>
+                    <td>3.36</td>
+                    <td>4.88</td>
+                    <td>5.99</td>
+                    <td>7.78</td>
+                    <td>9.49</td>
+                    <td>13.28</td>
+                </tr>
+                <tr class="midblue">
+                    <td class="darkblue">conclusion:</td>
+                    <td colspan="8">NOT significantly different from chance alone</td>
+                    <td colspan="2">significant</td>
+                </tr>
+            </table>
+            <div class="instructions">
+                Enter your p-value in the box below, then click the button below to check your answer.
+            </div>
+            <span><strong>P-value:</strong> <input type="text" id="p_pvalue"></span>
+            <input type="button" id="pcheck" value="Check answer" />
+<div id="pfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+        <div id="partq" class="hidden fadein chi_square">
+            <div class="instructions">
+                The p-value reflects the probability that any differences between
+                observed versus expected occurrences of your experiment are simply due to
+                sampling error. In order to reject our null hypothesis that the two genes
+                are independently assorting, we want a probability of 5% or less (p &lt;
+                0.05) that the differences between observed and expected events are due to
+                chance sampling error.
+            </div>
+            <div>
+                Based on my p-value found above, I <select id="q_reject">
+                    <option value="none"></option>
+                    <option value="reject">reject</option>
+                    <option value="fail">fail to reject</option>
+                </select> my null hypothesis that these two genes are independently assorting with respect to each
+                other.
+            </div>
+            <input type="button" id="qcheck" value="Check answer" />
+<div id="qfeedback" class="hidden fadein feedback">Sorry, that is not correct. Please fix the error(s) highlighted above.</div>
+        </div>
+
+        <div id="partr" class="hidden fadein chi_square">
+            <div class="instructions">
+                <p>Good! Given the above results, we <strong>reject</strong> the null hypothesis that the two genes
+                    above
+                    independently
+                    assort.</p>
+                <p>What does this mean about the genes you are looking at?</p>
+                <p>How can we use the information we gathered during this activity to account for this phenomenon?</p>
+            </div>
+        </div>
+
+        <div id="whitespacefix" style="clear: both; margin: 0; height: 2em;"> </div>
+    </div> <!-- end #content -->
+
+    <script src="linkage.js"></script>
+</body>

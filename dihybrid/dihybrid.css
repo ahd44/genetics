@@ -1,0 +1,420 @@
+/* copied from monohybrid and then subsequently modified */
+
+div#dev_buttons {
+    position: fixed;
+    bottom: 10%;
+    left: 2%;
+    background: green;
+    padding: 5px 10px 5px 5px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+}
+
+/* to do schtuff */
+.enotypic_ratios {
+    /* some kind of vertical flowing, fixed width container */
+    display: flex;
+    flex-direction: column;
+}
+
+div.ratio_flow {
+    display: flex;
+    margin: 3px;
+}
+
+div.ratio_flow img {
+    border: 1px solid black;
+}
+
+
+div.g_ratio_label {
+    width: 100px; /* fixed width but not sure about number */
+}
+
+div.ratio_flow input {
+    width: 100px; /* fixed width but not sure about number */
+    height: 1.8em;
+    margin: auto;
+}
+
+div.two_column_main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+div#partbc_flex.two_column_main.in_part_b>div:nth-child(1),
+div#partbc_flex.two_column_main>div:nth-child(2) {
+    width: 58%;
+}
+
+div.two_column_main>* {
+    width: 48%;
+}
+
+
+div#partbc_flex.two_column_main>div:nth-child(1) {
+    width: 40%;
+    transition: width 1s;
+}
+
+div.two_column_main>div:nth-child(1) div.box_flow.two {
+    grid-template-columns: 200px 200px;
+    width: 400px;
+}
+
+/* end to do schtuff */
+
+/* unique to dihybrid */
+
+div.box_flow {
+    display: grid;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: start;
+    margin: 0 auto;
+    width: 480px;
+}
+
+div.box_flow.four {
+    grid-template-columns: 140px 100px 140px 100px;
+    grid-template-rows: 40px 130px 40px 130px;
+}
+
+div.box_flow.two {
+    grid-template-columns: 240px 240px;
+    grid-template-rows: 40px 100px 30px 150px;
+}
+
+/* four: 1,2,3,4; 9,10,11,12
+    two: 1,2 
+div.box_flow.four div:nth-child(8n+1),
+div.box_flow.four div:nth-child(8n+2),
+div.box_flow.four div:nth-child(8n+3),
+div.box_flow.four div:nth-child(8n+4),
+div.box_flow.two div:nth-child(1),
+div.box_flow.two div:nth-child(2) {
+    border-top: solid #fff thin;
+}
+
+/* four: 13, 14, 15, 16 
+/* two: 7,8 
+div.box_flow.four div:nth-child(n+13),
+div.box_flow.two div:nth-child(n+7) {
+    border-bottom: solid #fff thin;
+}
+
+/* four: 1, 5, 9, 13; 3, 7, 11, 15 
+    two: all 
+div.box_flow.four div:nth-child(2n+1),
+div.box_flow.two div {
+    border-left: solid #fff thin;
+}
+
+/* four: 4, 8, 12, 16 
+    two: 2, 4, 6
+div.box_flow.four div:nth-child(4n+4),
+div.box_flow.two div:nth-child(2n+2) {
+    border-right: solid #fff thin;
+} */
+
+div.box_flow.two div {
+    text-align: center;
+    justify-content: space-around;
+}
+
+
+div.empty {
+    width: 100%;
+    height: 100%;
+}
+
+div.fly_text {   
+    height: 100%;
+    width: 100%;
+    display: grid;
+}
+
+div.fly_text span {
+    place-self: end start;
+}
+
+div.fly {
+    place-self: center start;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+div.header_text {
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+}
+
+div.inputs {
+    display: flex;
+    flex-direction: column;
+    place-self: center center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+div.inputs input {
+    width: 100px;
+    margin: 2px;
+    font-size: .9em;
+    padding: 2px;
+}
+
+div.fly img {
+    display: block;
+    border: solid black thin;
+    margin-top: 2px;
+}
+
+div.father div.gamete, div.mother div.gamete {
+    color: white;
+    width: 100px;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 5px auto;
+    border: solid thin #555555;
+    height: 26px;
+}
+
+div.placeholder div.gamete {
+    width: 100px;
+    border-radius: 4px;
+    padding: 3px;
+    margin: 5px auto;
+    height: 26px;
+}
+
+div.father div.gamete {
+    background: darkblue;
+}
+
+div.mother div.gamete {
+    background: darkred;
+}
+
+table th.vert div.draggable {
+    width: 50px;
+    overflow: visible;
+}
+
+table th.vert div.draggable div.gamete {
+    position: relative;
+    right: 22px;
+}
+
+div.draggable {
+    user-select: none;
+}
+
+div.dropzone_indicator {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    border: dashed 2px darkgray;
+    border-radius: 5px;
+}
+
+.gameteSelected div {
+    outline: magenta 4px solid;
+}
+
+div#content div#parta {
+    margin-top: 0;
+    padding-top: 0.5em;
+}
+
+table.ps_dihybrid tr th.highlighted,
+table.ps_dihybrid tr th.highlighted[scope="row"],
+table.ps_dihybrid tr th.highlighted[scope="col"] {
+    box-shadow: inset 0 0 0px 3px red;
+}
+
+table.ps_dihybrid tr th.unhighlighted,
+table.ps_dihybrid tr th.unhighlighted[scope="row"],
+table.ps_dihybrid tr th.unhighlighted[scope="col"] {
+    box-shadow: inset 0 0 0px 3px gray;
+}
+/* flex stuff */
+
+
+/* cross (1st part) */
+.cross_flow {
+    display: flex;
+    align-items: center;
+}
+
+.cross_flow>* {
+    margin: 5px;
+    text-align: center;
+}
+
+.cross_flow input {
+    width: 75px;
+    margin-top: 3px;
+}
+
+.cross_flow .bigx {
+    font-size: 2em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.column_flow {
+    display: flex;
+    flex-direction: column;
+}
+
+/* punnett square (2nd part) */
+
+.ps_flow {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.ps_flow>* {
+    width: 25%;
+}
+
+.ps_flow>table.ps {
+    width: 40%;
+}
+
+.column_flow img {
+    width: 75px;
+    border: solid thin black;
+    margin: 5px auto;
+}
+
+
+/* Ratios */
+
+.ratios img {
+    display: block;
+}
+
+/* Punnett Square table - dihybrid */
+table.ps_dihybrid {
+    border-collapse: collapse;
+}
+
+table.ps_dihybrid td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+table.ps_dihybrid td img {
+    display: block;
+    border: solid thin black;
+    margin: auto;
+}
+
+table.ps_dihybrid td {
+    width: 120px;
+    height: 120px;
+}
+
+table.ps_dihybrid tr th[scope="col"] {
+    height: 55px;
+    width: 120px;
+    border: 1px solid black;
+    border-top: none;
+}
+
+table.ps_dihybrid tr th[scope="row"] {
+    width: 55px;
+    height:120px;
+    border: 1px solid black;
+    border-left: none;
+}
+
+table.ps_dihybrid tr th[scope="row"].gametedropzone .gamete {
+    transform: rotate(-90deg);
+    display: block;
+}
+
+table.ps_dihybrid tr:nth-child(1) th.header {
+    width: 55px;
+}
+
+table.ps_dihybrid tr:nth-child(1) th.header {
+    width: unset;
+    height: 55px;
+}
+
+table.ps_dihybrid th.empty {
+    border: none;
+}
+
+table.ps_dihybrid th.gametedropzone {
+    font-weight: normal;
+}
+
+table.ps_dihybrid td.flyzone input {
+    width: 100px;
+}
+
+table.ps_dihybrid td.flyzone img {
+    margin-top: 1em;
+}
+
+table.ps_dihybrid.in_part_c td span,
+table.ps_dihybrid.in_part_c td input,
+table.ps_dihybrid.in_part_c td img {
+    display: none;
+}
+
+table.ps_dihybrid.in_part_d td img {
+    display: none;
+}
+
+/* Punnett Square table */
+table.ps th.mother {
+    width: 55px;
+}
+
+table.ps th.father {
+    height: 55px;
+}
+
+table.ps td.borderless {
+    border: none;
+}
+
+table.ps td.t-gamete {
+    border-top: none;
+}
+
+table.ps td.l-gamete {
+    border-left: none;
+}
+
+table.ratios.phenotype td {
+    text-align: left;
+
+}
+
+table.ratios.phenotype img {
+    margin-left: 0;
+}
+
+/* last part */
+
+textarea {
+    width: 40%;
+    height: 4em;
+    display: block;
+}

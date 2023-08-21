@@ -1,0 +1,126 @@
+
+/* utility classes */
+
+div#content div#parta {
+    margin-top: 0;
+    padding-top: 0.5em;
+}
+
+
+/* flex stuff */
+
+
+/* cross (1st part) */
+.cross_flow {
+    display: flex;
+    align-items: center;
+}
+
+.cross_flow > * {
+    margin: 5px;
+    text-align: center;
+}
+
+.cross_flow input {
+    width: 75px;
+    margin-top: 3px;
+}
+
+.cross_flow .bigx {
+    font-size: 2em;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.column_flow {
+    display: flex;
+    flex-direction: column;
+    height: 187px;
+}
+/* punnett square (2nd part) */
+
+.ps_flow {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.ps_flow > * {
+    width: 25%;
+}
+
+.ps_flow > table.ps {
+    width: 40%;
+}
+
+.ps_flow > table.ps.narrow {
+    width: 25%; /* will lead to equal widths for each part, makes table less awkwardly wide */
+}
+
+.column_flow img {
+    width: 75px;
+    border: solid thin black;
+    margin: 5px auto;
+}
+
+
+/* Ratios */
+
+.ratios img {
+    display: block;
+}
+
+
+/* Punnett Square table */
+table.ps {
+    border-collapse: collapse;
+}
+
+table.ps td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+table.ps td img {
+    display: block;
+    border: solid thin black;
+    margin: auto;
+}
+
+table.ps th.mother {
+    width: 55px;
+}
+
+table.ps th.father {
+    height: 55px;
+}
+
+table.ps td.borderless {
+    border: none;
+}
+
+table.ps td.t-gamete {
+    border-top: none;
+}
+
+table.ps td.l-gamete {
+    border-left: none;
+}
+
+table.ratios.phenotype td {
+    text-align: left;
+
+}
+
+table.ratios.phenotype img {
+    margin-left: 0;
+}
+
+/* last part */
+
+textarea {
+    width: 40%;
+    height: 4em;
+    display: block;
+}

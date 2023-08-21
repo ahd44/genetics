@@ -1,0 +1,466 @@
+<html>
+
+<head>
+	<title>Linkage in Anopheles gambiae</title>
+<style type="text/css">
+img {
+	border: 1px #c9c9c9 solid;
+	margin: 6px;
+}
+
+.tablediv {
+    margin-left: auto;
+	margin-right: auto;
+    display: table;
+}
+
+.rowdiv {
+    display: table-row;
+}
+
+.imgholder {
+    display: table-cell;
+}
+
+.imgholder div {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+.imgholder div img {
+	margin: 6px;
+}
+
+.genotype {
+	font-size:smaller;
+}
+
+body {
+    text-align:center;
+	font-size: larger;
+	height:1500px;
+}
+
+button {
+    width: auto;
+    height: auto;
+    font-size: larger;
+}
+
+#part2, #gen1, #part3, #tctable, #mate2, #mate3, #f1gt {
+	visibility: hidden;
+}
+
+#mate3 {
+	margin-bottom: 10px;
+}
+
+#offspring_flies {
+	text-align:center;
+}
+
+#offspring_flies table {
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+</style>
+<!-- Javascript: -->
+<script type="text/javascript">
+
+var REF = function(){
+	var r = {}
+	r.selectedColor = "rgb(92, 173, 255)";
+	r.incorrectColor = "rgb(128, 0, 0)";
+	
+	r.numberSelected = 0;
+	r.tcSelected = 0;
+	
+	r.traitNames = {
+		a:"abnormal eye",b:"golden body",c:"scarlet",d:"DDT resistance"
+	};
+	
+	r.traitAbbrev = {
+		a:"a",b:"g",c:"s",d:"DDT"
+	};
+	
+	r.part2 = {
+		pre:"After several weeks, the F1 generation of mosquitoes is born.<hr />All of the F1 offspring are double heterozygotes for ",
+		conjunction:" and ",
+		post:":"
+	};
+	
+	r.part3 = "Select the mosquito strain that you would use to perform a <strong>test cross</strong> by clicking on the image of the mosquito below.";
+	
+	r.position = {
+		a:42.0,
+		b:26.0,
+		c:10.0,
+		d:14.0
+	};
+	
+	r.rows = 10;
+	r.cols = 5;
+	
+	return r;
+}();
+
+select_background = function(img) {
+	if(img.selected) {
+		img.parentNode.style.backgroundColor = "";
+		img.selected = false;
+		REF.numberSelected--;
+	} else {
+		img.parentNode.style.backgroundColor = REF.selectedColor;
+		img.selected = true;
+		REF.numberSelected++;
+	}
+	if(REF.numberSelected==2) {
+		document.getElementById("mate").disabled = false;
+	} else {
+		document.getElementById("mate").disabled = true;
+	}
+}
+
+mate_gen0 = function() {
+	document.getElementById("mate").disabled = true;
+	
+	document.getElementById("gen0aimg").onclick = undefined;
+	document.getElementById("gen0bimg").onclick = undefined;
+	document.getElementById("gen0cimg").onclick = undefined;
+	document.getElementById("gen0dimg").onclick = undefined;
+	
+	//make second text section appear w/ trait names
+	//so, find out which flies were selected
+	var selected = {a:false, b:false, c:false, d:false}
+	selected.a = (document.getElementById("gen0aimg").parentNode.style.backgroundColor == REF.selectedColor);
+	selected.b = (document.getElementById("gen0bimg").parentNode.style.backgroundColor == REF.selectedColor);
+	selected.c = (document.getElementById("gen0cimg").parentNode.style.backgroundColor == REF.selectedColor);
+	selected.d = (document.getElementById("gen0dimg").parentNode.style.backgroundColor == REF.selectedColor);
+	
+	traits = {};
+	if(selected.a) traits.one = REF.traitNames.a;
+	if(selected.b) if(traits.one) traits.two = REF.traitNames.b; else traits.one = REF.traitNames.b;
+	if(selected.c) if(traits.one) traits.two = REF.traitNames.c; else traits.one = REF.traitNames.c;
+	if(selected.d) traits.two = REF.traitNames.d;	
+	
+	document.getElementById("part2").innerHTML = REF.part2.pre + traits.one + REF.part2.conjunction + traits.two + REF.part2.post;
+	document.getElementById("part2").style.visibility = "visible";
+	document.getElementById("part3").innerHTML = REF.part3;
+	document.getElementById("part3").style.visibility = "visible";
+	document.getElementById("gen1").style.visibility = "visible";
+	document.getElementById("tctable").style.visibility = "visible";
+	document.getElementById("mate2").style.visibility = "visible";
+	document.getElementById("f1gt").innerHTML = (selected.a?"Aa":"") + (selected.b?"Gg":"") + (selected.c?"Ss":"") + (selected.d?"Dd":"") + "<br>";
+	document.getElementById("f1gt").style.visibility = "visible";
+	
+	//id correct test-cross fly
+	var tcflies = {};
+	var tcfly = (selected.a?"a":"") + (selected.b?"g":"") + (selected.c?"s":"") + (selected.d?"DDT":"");
+	tcflies.one = tcfly;
+	REF.tc182 = tcfly;
+	//generate random test-cross flies
+	while(!tcflies.four) {
+		tc = generateRandomTC();
+		if(tcflies.one == tc) continue;
+		else {
+			if(!tcflies.two) tcflies.two = tc;
+			else {
+				if(tcflies.two == tc) continue;
+				if(!tcflies.three) tcflies.three = tc;
+				else {
+					if(tcflies.three == tc) continue;
+					tcflies.four = tc;
+				}
+			}
+		}
+	}
+	
+	//randomly populate table
+	tcflies = randomizeFour(tcflies)
+	document.getElementById("tc1").innerHTML = '<img src="mutant_'+tcflies.one+'.png" onclick="testCrossClick(this);">';
+	document.getElementById("tc2").innerHTML = '<img src="mutant_'+tcflies.two+'.png" onclick="testCrossClick(this);">';
+	document.getElementById("tc3").innerHTML = '<img src="mutant_'+tcflies.three+'.png" onclick="testCrossClick(this);">';
+	document.getElementById("tc4").innerHTML = '<img src="mutant_'+tcflies.four+'.png" onclick="testCrossClick(this);">';
+	
+	document.getElementById("tc1holder").innerHTML = tcflies.one[0] + tcflies.one[0] + (tcflies.one.length>2?'dd':tcflies.one[1]+tcflies.one[1]) + '<br>';
+	document.getElementById("tc2holder").innerHTML = tcflies.two[0] + tcflies.two[0] + (tcflies.two.length>2?'dd':tcflies.two[1]+tcflies.two[1]) + '<br>';
+	document.getElementById("tc3holder").innerHTML = tcflies.three[0] + tcflies.three[0] + (tcflies.three.length>2?'dd':tcflies.three[1]+tcflies.three[1]) + '<br>';
+	document.getElementById("tc4holder").innerHTML = tcflies.four[0] + tcflies.four[0] + (tcflies.four.length>2?'dd':tcflies.four[1]+tcflies.four[1]) + '<br>';
+	//gray out non-selected strains?
+	
+	REF.selected = selected; //save this for later
+}
+
+testCrossClick = function(img) {
+	if(img.selected) {
+		img.parentNode.style.backgroundColor = "";
+		img.selected = false;
+		REF.tcSelected--;
+	} else {
+		//clear all of background color attribute
+		(document.getElementById("tc1").style.backgroundColor==REF.incorrectColor)?document.getElementById("tc1").style.backgroundColor ="":"";
+		(document.getElementById("tc2").style.backgroundColor==REF.incorrectColor)?document.getElementById("tc2").style.backgroundColor ="":"";
+		(document.getElementById("tc3").style.backgroundColor==REF.incorrectColor)?document.getElementById("tc3").style.backgroundColor ="":"";
+		(document.getElementById("tc4").style.backgroundColor==REF.incorrectColor)?document.getElementById("tc4").style.backgroundColor ="":"";
+		img.parentNode.style.backgroundColor = REF.selectedColor;
+		img.selected = true;
+		REF.tcSelected++;
+	}
+	if(REF.tcSelected==1) {
+		document.getElementById("mate2").disabled = false;
+	} else {
+		document.getElementById("mate2").disabled = true;
+	}
+}
+
+mate_gen1 = function() {
+	//if fly selected is wrong
+	if(!checkTCfly()) {
+		document.getElementById("feedback").innerHTML = "Sorry, that is not correct. Please try again!";
+		REF.tcSelected--;
+		document.getElementById("mate2").disabled = true;
+		if(document.getElementById("tc1").children[0].selected) {
+			document.getElementById("tc1").children[0].selected = false;
+			document.getElementById("tc1").style.backgroundColor = REF.incorrectColor;	
+		} else if(document.getElementById("tc2").children[0].selected) {
+			document.getElementById("tc2").children[0].selected = false;
+			document.getElementById("tc2").style.backgroundColor = REF.incorrectColor;	
+		} else if(document.getElementById("tc3").children[0].selected) {
+			document.getElementById("tc3").children[0].selected = false;
+			document.getElementById("tc3").style.backgroundColor = REF.incorrectColor;	
+		} else {
+			document.getElementById("tc4").children[0].selected = false;
+			document.getElementById("tc4").style.backgroundColor = REF.incorrectColor;	
+		}
+	} else {
+		document.getElementById("feedback").innerHTML = "Correct!";
+		document.getElementById("mate2").disabled = true;
+		document.getElementById("tc1").children[0].onclick = "";
+		document.getElementById("tc2").children[0].onclick = "";
+		document.getElementById("tc3").children[0].onclick = "";
+		document.getElementById("tc4").children[0].onclick = "";
+		
+		
+		document.getElementById("mate3").disabled = false;
+		document.getElementById("mate3").style.visibility = "visible";
+		document.getElementById("precrossinstructions").innerHTML = "Click below to view the offspring from this test cross.";
+		//pop up offspring flies using REF.position.a-d and the div id=offspring_flies. suggest table.
+		//use REF.rows and REF.cols for number of offspring to generate
+		
+	}
+}
+
+mate_gen2 = function() {
+	document.getElementById("mate3").disabled = true;
+	var nr = 0;
+	var np = 0;
+	var p1 = -1;
+	var parental_fly_1;
+	var p2 = -1;
+	var parental_fly_2;
+	if(REF.selected.a) {
+		parental_fly_1 = "a";
+		p1 = REF.position.a;
+	}
+	if(REF.selected.b) {
+		if(p1 == -1) {
+			parental_fly_1 = "g";
+			p1 = REF.position.b;
+		}
+		else {
+			p2 = REF.position.b;
+			parental_fly_2 = "g";
+		}
+	}
+	if(REF.selected.c) {
+		if(p1 == -1) {
+			parental_fly_1 = "s";
+			p1 = REF.position.c;
+		}
+		else {
+			parental_fly_2 = "s";
+			p2 = REF.position.c;
+		}
+	}
+	if(REF.selected.d) {
+		p2 = REF.position.d;
+		parental_fly_2 = "DDT";
+	}
+	var p_recom = (Math.abs(p1 - p2)) / 100;
+	var table_to_insert = '<table>\n';
+	var desiredRecombinant = parseInt(Math.abs(p1 - p2)/ (100 / (REF.rows*REF.cols)));
+	var maxNR = desiredRecombinant + 1;
+	var maxNP = REF.rows * REF.cols - desiredRecombinant + 1;
+	var doublemutant = (REF.selected.a?"a":"") + (REF.selected.b?"g":"") + (REF.selected.c?"s":"") + (REF.selected.d?"DDT":"");
+	table_to_insert+="<tr>\n<th></th>\n";
+	for(i=1;i<=REF.cols;i++) {
+		table_to_insert+="<th>" + i + "</th>\n";
+	}
+	table_to_insert+="</tr>\n";
+	for(i=0;i<REF.rows;i++) {
+		table_to_insert += "<tr>\n<th>" + (i+1) + "</th>\n";
+		for(j=0;j<REF.cols;j++) {
+			table_to_insert += "<td>";
+			if(Math.random() < p_recom) { //recombinant fly
+				if(nr >= maxNR) { 
+					np++;
+					if(Math.random() < .5) {
+						table_to_insert += '<img src="mutant_' + parental_fly_1 + '.png">';
+					} else {
+						table_to_insert += '<img src="mutant_' + parental_fly_2 + '.png">';
+					}
+				} else {
+					nr++;
+					if(Math.random() < .5) {
+						table_to_insert += '<img src="wildtype.png">';
+					} else {
+						table_to_insert += '<img src="mutant_' + doublemutant + '.png">';
+					}
+				}
+			} else { //parental fly
+				if(np >= maxNP) { 
+					nr++;
+					if(Math.random() < .5) {
+						table_to_insert += '<img src="wildtype.png">';
+					} else {
+						table_to_insert += '<img src="mutant_' + doublemutant + '.png">';
+					}
+				} else {
+					np++;
+					if(Math.random() < .5) {
+						table_to_insert += '<img src="mutant_' + parental_fly_1 + '.png">';
+					} else {
+						table_to_insert += '<img src="mutant_' + parental_fly_2 + '.png">';
+					}
+				}
+			}
+			table_to_insert +="</td>\n";
+		}
+		table_to_insert += "</tr>\n";
+	}
+	table_to_insert +="</table>";
+	
+	document.getElementById("offspring_flies").innerHTML = table_to_insert;
+	/*console.log("NR: " + nr);
+	console.log("NP: " + np);
+	console.log("MaxNR: " + maxNR);
+	console.log("MaxNP: " + maxNP);
+	console.log("calc freq: " + (nr/(nr+np)));*/
+}
+
+checkTCfly = function() {
+	var src;
+	if(document.getElementById("tc1").children[0].selected) { src = document.getElementById("tc1").children[0].src; }
+	else if(document.getElementById("tc2").children[0].selected) { src = document.getElementById("tc2").children[0].src; }
+	else if(document.getElementById("tc3").children[0].selected) { src = document.getElementById("tc3").children[0].src; }
+	else { src = document.getElementById("tc4").children[0].src; }
+	src1 = src.substring(src.length-6,src.length-4);
+	src2 = src.substring(src.length-8,src.length-4);
+	return (src1 == REF.tc182) || (src2 == REF.tc182);
+}
+
+generateRandomTC = function() {
+	var tbr;
+	var rn = Math.random()*6;
+	if(rn < 1) { tbr = "ag"; }
+	else if(rn < 2) { tbr = "as"; }
+	else if(rn < 3) { tbr = "aDDT"; }
+	else if(rn < 4) { tbr = "gs"; }
+	else if(rn < 5) { tbr = "gDDT"; }
+	else { tbr = "sDDT"; }
+	
+	return tbr;
+}
+
+randomizeFour = function(item) {
+	tbr = {one:undefined, two:undefined, three:undefined, four:undefined};
+	rn = Math.random()*4;
+	if(rn < 1) {
+		tbr.one = item.one;
+	} else if(rn < 2) {
+		tbr.two = item.one;
+	} else if(rn < 3) {
+		tbr.three = item.one;
+	} else {
+		tbr.four = item.one;
+	}
+	
+	rn = Math.random()*3;
+	if(rn < 1) {
+		if(!tbr.one) tbr.one = item.two;
+		else tbr.four = item.two;
+	} else if(rn < 2) {
+		if(!tbr.two) tbr.two = item.two;
+		else tbr.four = item.two;
+	} else {
+		if(!tbr.three) tbr.three = item.two;
+		else tbr.four = item.two;
+	}
+	
+	rn = Math.random()*2;
+	if(!tbr.one) { //1/2
+		if(rn < 1) tbr.one = item.three; // 1/2 * 1/2 = 1/4
+		else {
+			//put it in whichever other one is available
+			if(!tbr.two) tbr.two = item.three; //1/12
+			else if(!tbr.three) tbr.three = item.three; // 1/12
+			else tbr.four = item.three; //1/12
+		}
+	} else if(!tbr.two) { //1/2 * 1/2 = 1/4
+		if(rn < 1) tbr.two = item.three; //1/8
+		else {
+			if(!tbr.three) tbr.three = item.three; //1/4 * 1/2 * 1/2 = 1/16
+			else tbr.four = item.three; //1/16
+		}
+	} else { //1/2 * 1/2 = 1/4
+		if(rn < 1) tbr.three = item.three; //1/8
+		else tbr.four = item.three; // 1/8
+	}
+	
+	if(!tbr.one) tbr.one = item.four;
+	else if(!tbr.two) tbr.two = item.four;
+	else if(!tbr.three) tbr.three = item.four;
+	else tbr.four = item.four;
+	
+	return tbr;
+}
+
+</script>
+</head>
+
+<body>
+<!-- HTML: -->
+<p>Select two strains of mosquitoes below by clicking on the images of the mosquitoes you would like to mate.</p>
+<div class="tablediv">
+    <div class="rowdiv">
+        <div class="imgholder" id="gen0a"><div><span class="genotype"><i>abnormal eye</i><br>aa</span><br><div><img id="gen0aimg" onclick="select_background(this);" src="mutant_a.png" /></div></div></div>
+        <div class="imgholder" id="gen0b"><div><span class="genotype"><i>golden body</i><br>gg</span><br><div><img id="gen0bimg" onclick="select_background(this);" src="mutant_g.png" /></div></div></div>
+        <div class="imgholder" id="gen0c"><div><span class="genotype"><i>scarlet</i><br>ss</span><br><div><img id="gen0cimg" onclick="select_background(this);" src="mutant_s.png" /></div></div></div>
+        <div class="imgholder" id="gen0d"><div><span class="genotype">DDT resistant<br>dd</span><br><div><img id="gen0dimg" onclick="select_background(this);" src="mutant_DDT.png" /></div></div></div>
+    </div>
+</div>
+
+<button type="button" disabled onclick="mate_gen0();" id="mate">Mate Mosquitoes</button>
+
+<p id="part2"></p>
+<div><span class="genotype"><span id="f1gt"></span></span><img id="gen1" src="wildtype.png" /></div>
+<p id="part3"></p>
+<div id="tctable" class="tablediv">
+	<div class="rowdiv">
+        <div class="imgholder"><span class="genotype" id="tc1holder"></span><div id="tc1"></div></div>
+        <div class="imgholder"><span class="genotype" id="tc2holder"></span><div id="tc2"></div></div>
+        <div class="imgholder"><span class="genotype" id="tc3holder"></span><div id="tc3"></div></div>
+        <div class="imgholder"><span class="genotype" id="tc4holder"></span><div id="tc4"></div></div>
+    </div>
+</div>
+<p id="feedback"></p>
+<button type="button" disabled onclick="mate_gen1();" id="mate2">Check Answer</button>
+<p id="precrossinstructions"></p>
+<button type="button" disabled onclick="mate_gen2();" id="mate3">Mate Mosquitoes</button>
+<div id="offspring_flies">
+</div>
+</body>
+</html>

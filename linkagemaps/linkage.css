@@ -1,0 +1,249 @@
+
+div#null_hypothesis {
+    position: fixed;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    background: black;
+    color: #6497FF;
+    padding: 5px;
+    font-size: 1.8em;
+    z-index: 10; /* always over other elements */
+}
+
+div.spacer {
+    height: 10px;
+}
+
+div.fly_selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 5px auto 20px auto;
+    width: 500px;
+}
+
+div.flygp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.genotype_label {
+    display: block;
+    margin-bottom: 3px;
+}
+
+img.phenotype {
+    border: solid black 1px;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+img.selected {
+    box-shadow: 0 0 0 3px blue;
+}
+
+/* copied from dihybrid */
+
+div.box_flow {
+    display: grid;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: start;
+    margin: 0 auto;
+    width: 480px;
+}
+
+div.box_flow.two {
+    grid-template-columns: 240px 240px;
+    grid-template-rows: 40px 100px 30px 30px;
+}
+
+div.box_flow.two.short {
+    grid-template-rows: 40px 40px;
+}
+
+div.box_flow.two div {
+    text-align: center;
+    justify-content: space-around;
+}
+
+div.box_flow.four {
+    grid-template-columns: repeat(4, 120px);
+    grid-template-rows: 100px 40px;
+}
+
+div.fly {
+    place-self: center start;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+div.header_text {
+    font-size: 1.5em;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+}
+
+span#h_label1,
+span#h_label2 {
+    font-size: 1rem;
+    font-weight: normal;
+    display: block;
+}
+
+div.inputs {
+    display: flex;
+    flex-direction: column;
+    place-self: center center;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+div.inputs input {
+    width: 100px;
+    margin: 2px;
+    font-size: .9em;
+    padding: 2px;
+}
+
+div.inputs select {
+    width: 100px;
+    margin: 2px;
+    font-size: .9em;
+    padding: 2px;
+}
+
+div.fly img {
+    display: block;
+    border: solid black thin;
+    margin-top: 2px;
+}
+
+div.fly_text {
+    height: 100%;
+    width: 100%;
+    display: grid;
+}
+
+div.fly_text span {
+    place-self: end start;
+}
+
+div#day_counter,
+div#day_counter2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+    font-family: sans-serif;
+}
+
+progress#day_progress,
+progress#day_progress2 {
+    height: 30px;
+    width: 200px;
+    margin: auto;
+    display: block;
+}
+
+table.gamete_predictions {
+    width: 100%;
+}
+
+table.gamete_predictions tr td,
+table.gamete_predictions tr th {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+table.gamete_predictions tr td,
+table.gamete_predictions tr th {
+    padding: 3px 20px;
+    text-align: center;
+}
+
+table.gamete_predictions tr th {
+    font-size: 0.8em;
+}
+
+table.gamete_predictions.stage1 tr td:nth-of-type(n+2),
+table.gamete_predictions.stage1 tr th.freq_header,
+table.gamete_predictions.stage1 tr th.recomb_header {
+    visibility: hidden;
+    opacity: 0;
+}
+
+table.gamete_predictions.stage2 tr td:nth-of-type(n+3),
+table.gamete_predictions.stage2 tr th.recomb_header {
+    visibility: hidden;
+    opacity: 0;
+}
+
+div#k_progeny {
+    display: grid;
+    grid-template-columns: repeat(8, 85px);
+    grid-template-rows: repeat(7, 85px);
+    width: 710px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+}
+
+div#k_progeny img {
+    border: solid black thin;
+}
+
+/* chi-square */
+
+div.chi_square table {
+    border: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-color: #000000;
+    margin-bottom: 10px;
+}
+
+div.chi_square td,
+div.chi_square th {
+    border: 1px;
+    border-style: solid;
+    width: 150px;
+    text-align: center;
+    padding: 2px;
+    border-color: #000000;
+}
+
+div.chi_square .lightblue {
+    background-color: #BAD7F1;
+    color: #000000;
+    border: 0px;
+}
+
+div.chi_square .midblue {
+    background-color: #6A9DF0;
+    color: #000000;
+}
+
+div.chi_square .darkblue {
+    font-weight: bold;
+    border: 1px;
+    background-color: #2B52DD;
+    color: #FFFFFF;
+    border-color: #000000;
+}
+
+div.chi_square .error {
+    font-weight: bold;
+    color: #C40000;
+}
